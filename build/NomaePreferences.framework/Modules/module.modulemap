@@ -1,0 +1,11 @@
+framework module NomaePreferences {
+  umbrella header "NomaePreferences.h"
+
+  export *
+  module * { export * }
+}
+
+module NomaePreferences.Swift {
+    header "NomaePreferences-Swift.h"
+    requires objc
+}

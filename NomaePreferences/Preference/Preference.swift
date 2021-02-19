@@ -24,10 +24,9 @@
 // The majority of code in this file is from https://github.com/xavierLowmiller/AppStorage
 // The following changes have been made:
 //      - `AppStorage` renamed to `Preference` (typealias removed)
-//      - `setValue(newValue, forKey: key)` and `set(newValue, forKey: key)` changed to
-//          `setObject(newValue, forKey: key, inDomain: UserDefaults.globalDomain)`
-//      - `value(forKey: key)` and `url(forKey: key)` changed to
-//          `object(forKey: key, inDomain: UserDefaults.globalDomain)`
+//      - Rather than initializing with a UserDefaults object, a `String` identifier is used.
+//          The key is then appended to the identifier to create an identifiedKey. Values
+//          are stored in the `UserDefaults` global domain with their respective identifiedKey.
 //
 
 import SwiftUI
@@ -99,13 +98,14 @@ extension Preference where Value == Bool {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) {
-        let store = (store ?? .standard)
-        let initialValue = store.object(forKey: key, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
-            store.setObject(newValue, forKey: key, inDomain: UserDefaults.globalDomain)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -120,13 +120,14 @@ extension Preference where Value == Int {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) {
-        let store = (store ?? .standard)
-        let initialValue = store.object(forKey: key, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
-            store.setObject(newValue, forKey: key, inDomain: UserDefaults.globalDomain)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -142,13 +143,14 @@ extension Preference where Value == Double {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) {
-        let store = (store ?? .standard)
-        let initialValue = store.object(forKey: key, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
-            store.setObject(newValue, forKey: key, inDomain: UserDefaults.globalDomain)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -164,13 +166,14 @@ extension Preference where Value == String {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) {
-        let store = (store ?? .standard)
-        let initialValue = store.object(forKey: key, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
-            store.setObject(newValue, forKey: key, inDomain: UserDefaults.globalDomain)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -186,13 +189,14 @@ extension Preference where Value == URL {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) {
-        let store = (store ?? .standard)
-        let initialValue = store.object(forKey: key, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             ($0 as? String).flatMap(URL.init)
         }, saveValue: { newValue in
-            store.setObject(newValue, forKey: key, inDomain: UserDefaults.globalDomain)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -213,13 +217,14 @@ extension Preference where Value == Data {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) {
-        let store = (store ?? .standard)
-        let initialValue = store.object(forKey: key, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
-            store.setObject(newValue, forKey: key, inDomain: UserDefaults.globalDomain)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -248,14 +253,15 @@ extension Preference where Value: RawRepresentable, Value.RawValue == Int {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) {
-        let store = (store ?? .standard)
-        let rawValue = store.object(forKey: key, inDomain: UserDefaults.globalDomain) as? Int
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let rawValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Int
         let initialValue = rawValue.flatMap(Value.init) ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             ($0 as? Int).flatMap(Value.init)
         }, saveValue: { newValue in
-            store.setObject(newValue.rawValue, forKey: key, inDomain: UserDefaults.globalDomain)
+            store.setObject(newValue.rawValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -284,14 +290,15 @@ extension Preference where Value: RawRepresentable, Value.RawValue == String {
     ///     store.
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, store: UserDefaults? = nil) {
-        let store = (store ?? .standard)
-        let rawValue = store.object(forKey: key, inDomain: UserDefaults.globalDomain) as? String
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let rawValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? String
         let initialValue = rawValue.flatMap(Value.init) ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             ($0 as? String).flatMap(Value.init)
         }, saveValue: { newValue in
-            store.setObject(newValue.rawValue, forKey: key, inDomain: UserDefaults.globalDomain)
+            store.setObject(newValue.rawValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
