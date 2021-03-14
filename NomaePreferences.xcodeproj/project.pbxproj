@@ -14,6 +14,9 @@
 		63981BB525DF429B002A7BA7 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63981BB425DF429B002A7BA7 /* Header.swift */; };
 		63981BB825DF42B0002A7BA7 /* ColorField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63981BB725DF42B0002A7BA7 /* ColorField.swift */; };
 		63981BBB25DF42BB002A7BA7 /* Color+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63981BBA25DF42BB002A7BA7 /* Color+HexString.swift */; };
+		63AF44B925FBCEF900AD297B /* TwitterLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AF44B825FBCEF900AD297B /* TwitterLogo.swift */; };
+		63AF44BF25FBCF5400AD297B /* RedditLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AF44BE25FBCF5400AD297B /* RedditLogo.swift */; };
+		63CE156725FB45F600A33AD3 /* GitHubLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CE156625FB45F600A33AD3 /* GitHubLogo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		63981BB425DF429B002A7BA7 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		63981BB725DF42B0002A7BA7 /* ColorField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorField.swift; sourceTree = "<group>"; };
 		63981BBA25DF42BB002A7BA7 /* Color+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HexString.swift"; sourceTree = "<group>"; };
+		63AF44B825FBCEF900AD297B /* TwitterLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterLogo.swift; sourceTree = "<group>"; };
+		63AF44BE25FBCF5400AD297B /* RedditLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditLogo.swift; sourceTree = "<group>"; };
+		63CE156625FB45F600A33AD3 /* GitHubLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLogo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +94,7 @@
 		634D76B425DF420F00E2326C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				63AF44B725FBCEE900AD297B /* Logos */,
 				63981BB425DF429B002A7BA7 /* Header.swift */,
 				63981BB725DF42B0002A7BA7 /* ColorField.swift */,
 			);
@@ -100,6 +107,16 @@
 				63981BBA25DF42BB002A7BA7 /* Color+HexString.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		63AF44B725FBCEE900AD297B /* Logos */ = {
+			isa = PBXGroup;
+			children = (
+				63CE156625FB45F600A33AD3 /* GitHubLogo.swift */,
+				63AF44B825FBCEF900AD297B /* TwitterLogo.swift */,
+				63AF44BE25FBCF5400AD297B /* RedditLogo.swift */,
+			);
+			path = Logos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,9 +199,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63AF44B925FBCEF900AD297B /* TwitterLogo.swift in Sources */,
 				63981BBB25DF42BB002A7BA7 /* Color+HexString.swift in Sources */,
 				63981BB825DF42B0002A7BA7 /* ColorField.swift in Sources */,
 				63981BB525DF429B002A7BA7 /* Header.swift in Sources */,
+				63CE156725FB45F600A33AD3 /* GitHubLogo.swift in Sources */,
+				63AF44BF25FBCF5400AD297B /* RedditLogo.swift in Sources */,
 				63981BAF25DF427A002A7BA7 /* NomaePreferencesController.swift in Sources */,
 				63981BB225DF428B002A7BA7 /* PreferenceLoaderController.swift in Sources */,
 				63981BAC25DF425F002A7BA7 /* Preference.swift in Sources */,

@@ -3,6 +3,7 @@
 //  NomaePreferences
 //
 //  Created by Eamon Tracey.
+//  Copyright © 2021 Eamon Tracey. All rights reserved.
 //
 
 import SwiftUI

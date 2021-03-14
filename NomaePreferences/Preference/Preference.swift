@@ -25,10 +25,11 @@
 // The following changes have been made:
 //      - `AppStorage` renamed to `Preference` (typealias removed)
 //      - Rather than initializing with a UserDefaults object, a `String` identifier is used.
-//          The key is then appended to the identifier to create an identifiedKey. Values
-//          are stored in the `UserDefaults` global domain with their respective identifiedKey.
+//          The key is then appended to the identifier to create an identifiedKey. Each value
+//          is stored in the `UserDefaults` global domain with its respective identifiedKey.
 //
 
+import Combine
 import SwiftUI
 
 /// A property wrapper type that reflects a value from `UserDefaults` and
@@ -60,7 +61,8 @@ import SwiftUI
     }
 }
 
-private class Storage<Value>: NSObject, ObservableObject {
+@usableFromInline
+class Storage<Value>: NSObject, ObservableObject {
     @Published var value: Value
     private let defaultValue: Value
     private let store: UserDefaults

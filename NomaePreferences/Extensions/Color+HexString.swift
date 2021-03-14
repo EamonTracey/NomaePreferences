@@ -3,6 +3,7 @@
 //  NomaePreferences
 //
 //  Created by Eamon Tracey.
+//  Copyright © 2021 Eamon Tracey. All rights reserved.
 //
 
 import SwiftUI
@@ -19,8 +20,8 @@ extension Color {
         if first.count != 6 { return nil }
         var rgb: UInt64 = 0
         Scanner(string: String(first)).scanHexInt64(&rgb)
-        let last = split.last ?? "1.0"
-        guard let opacity = Double(String(last)) else { return nil }
+        guard let last = split.last else { return nil }
+        guard let opacity = Double(last) else { return nil }
         self.init(
             red: Double((rgb & 0xFF0000) >> 16) / 255.0,
             green: Double((rgb & 0x00FF00) >> 8) / 255.0,

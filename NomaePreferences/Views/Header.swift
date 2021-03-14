@@ -3,6 +3,7 @@
 //  NomaePreferences
 //
 //  Created by Eamon Tracey.
+//  Copyright © 2021 Eamon Tracey. All rights reserved.
 //
 
 import SwiftUI
@@ -14,7 +15,7 @@ public struct Header<Icon: View>: View {
     let icon: Icon?
     let subtitle: String?
     
-    public init(_ packageName: String, icon: Icon?, subtitle: String? = nil) {
+    public init(_ packageName: String, icon: Icon? = nil, subtitle: String? = nil) {
         self.packageName = packageName
         self.icon = icon
         self.subtitle = subtitle
