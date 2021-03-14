@@ -5,85 +5,185 @@
 	<key>files</key>
 	<dict>
 		<key>Headers/NomaePreferences-Swift.h</key>
-		<data>
-		keGUNYUL9SYTxQ0PNZhBb6yfOpc=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			keGUNYUL9SYTxQ0PNZhBb6yfOpc=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Headers/NomaePreferences.h</key>
-		<data>
-		oQADn0MgS0ZxuW8fVjRNi7LjnQU=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			oQADn0MgS0ZxuW8fVjRNi7LjnQU=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Info.plist</key>
-		<data>
-		mpIEbnjksZPc+FHM9xg80QHhGJk=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			XFPxz/L5KdzgCbJNvP64hjh9+MQ=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
-		<data>
-		o4gpiJ/yoBTd+BdP8Eu7F9A8SC0=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			8k6P2NVfToahY+Q0zG1vtUtRvxw=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/Project/arm64.swiftsourceinfo</key>
-		<data>
-		o4gpiJ/yoBTd+BdP8Eu7F9A8SC0=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			8k6P2NVfToahY+Q0zG1vtUtRvxw=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/Project/arm64e-apple-ios.swiftsourceinfo</key>
-		<data>
-		WXCR4FyTsaLwtiYk550KPNJ8/9k=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			GJDBRnX9iOcaCJTjgumBcMFoB1E=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/Project/arm64e.swiftsourceinfo</key>
-		<data>
-		WXCR4FyTsaLwtiYk550KPNJ8/9k=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			GJDBRnX9iOcaCJTjgumBcMFoB1E=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64-apple-ios.swiftdoc</key>
-		<data>
-		ky2gyT8CUH0fTY6SI1ONtRFvopw=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			h+fk+x8Evli4b/WPJ/yxTOeYMfw=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64-apple-ios.swiftinterface</key>
-		<data>
-		88A9WmzVTPEec1Sv9i88H6wcyWQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZGdbdeeXchXoeXNbIsAv+a1xN5I=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64-apple-ios.swiftmodule</key>
-		<data>
-		WqgyY1bTjtQqcVNGKry8meBaeu4=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Qsv+dNforS+E0XGmpW7/U6CqutM=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64.swiftdoc</key>
-		<data>
-		ky2gyT8CUH0fTY6SI1ONtRFvopw=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			h+fk+x8Evli4b/WPJ/yxTOeYMfw=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64.swiftinterface</key>
-		<data>
-		88A9WmzVTPEec1Sv9i88H6wcyWQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZGdbdeeXchXoeXNbIsAv+a1xN5I=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64.swiftmodule</key>
-		<data>
-		WqgyY1bTjtQqcVNGKry8meBaeu4=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Qsv+dNforS+E0XGmpW7/U6CqutM=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64e-apple-ios.swiftdoc</key>
-		<data>
-		wSUynuqlVk0uQs9N1St8KfJRmRs=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			6ujZfiFlhcqqXNDbZTbBXeEidj0=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64e-apple-ios.swiftinterface</key>
-		<data>
-		brz1a+Msd5T4Sa3gt92jFtnYv70=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			R8A5fmI6mXMKMEtGL9OTclyUMEg=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64e-apple-ios.swiftmodule</key>
-		<data>
-		kayKh4NnpF0hPd5/ISw1mtxRGSo=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Xacbdjd/7aETNYykVNLaBaQQhcg=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64e.swiftdoc</key>
-		<data>
-		wSUynuqlVk0uQs9N1St8KfJRmRs=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			6ujZfiFlhcqqXNDbZTbBXeEidj0=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64e.swiftinterface</key>
-		<data>
-		brz1a+Msd5T4Sa3gt92jFtnYv70=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			R8A5fmI6mXMKMEtGL9OTclyUMEg=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64e.swiftmodule</key>
-		<data>
-		kayKh4NnpF0hPd5/ISw1mtxRGSo=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Xacbdjd/7aETNYykVNLaBaQQhcg=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 		<key>Modules/module.modulemap</key>
-		<data>
-		tK4PEpDdjskuWbm0VG6yGelZH+E=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			tK4PEpDdjskuWbm0VG6yGelZH+E=
+			</data>
+			<key>optional</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>files2</key>
 	<dict>
@@ -105,112 +205,112 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2ALbKqpTRQPtPoQJBRZtIyhAebJSvdEpTT7WFIoe2+g=
+			rdYWKfGlBeD+gSgmmnl34q6pTcWCz0SR/+eA30idLd0=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2ALbKqpTRQPtPoQJBRZtIyhAebJSvdEpTT7WFIoe2+g=
+			rdYWKfGlBeD+gSgmmnl34q6pTcWCz0SR/+eA30idLd0=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/Project/arm64e-apple-ios.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			6HLZ6LYnYXadqY8NvhhFT4aqUIpKAhIpCr0P41uiFZ0=
+			EMvHGHzlRB0Z4ONYSIzJhxONn8K5VWN4tNm6OIor190=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/Project/arm64e.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			6HLZ6LYnYXadqY8NvhhFT4aqUIpKAhIpCr0P41uiFZ0=
+			EMvHGHzlRB0Z4ONYSIzJhxONn8K5VWN4tNm6OIor190=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zT24vqSvsxC3uQQPxqysJyCayhUKJmeOWLvV9DD5JD8=
+			VY+WXcundLRcfCNYWvKhrZJCiTWtKvef2C094JA+m60=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VzmUHdCY7DooTirPtgEkSS4VKTMd0tVWFW7LvYtxqXI=
+			6xVtwjfnwkT8CyCBOBZfd4pINFJIdvRogVqzWt+RDBg=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5VtIsbsQh5HIBjOaIYnO3KNuceiUIATmKlRJ/OMQYrU=
+			VnrGoXcVi7r3tnhPBeGbv3G6TC6D8zUCFE53l40JPtQ=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zT24vqSvsxC3uQQPxqysJyCayhUKJmeOWLvV9DD5JD8=
+			VY+WXcundLRcfCNYWvKhrZJCiTWtKvef2C094JA+m60=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VzmUHdCY7DooTirPtgEkSS4VKTMd0tVWFW7LvYtxqXI=
+			6xVtwjfnwkT8CyCBOBZfd4pINFJIdvRogVqzWt+RDBg=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5VtIsbsQh5HIBjOaIYnO3KNuceiUIATmKlRJ/OMQYrU=
+			VnrGoXcVi7r3tnhPBeGbv3G6TC6D8zUCFE53l40JPtQ=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64e-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bbX39qM0FPz3Q2zHx3UFtn+rN3bvW1SA8z+LBba4vno=
+			qJGZTn8hkc67xVC5sTpdCyxItZmllViUiJiu9wnH3dU=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64e-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Tb0YpH0xn+V+p/sWk7pgHsG+uOWGMjzpo8FtUC61wj0=
+			eOcbklioKhBKok5RAXhGe8DXNIBfVxLdFVtbYTQqsxo=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64e-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			LtEbLqH6HNZkntJloWP+SCMm9JYoCFaBxJoADMmIjAE=
+			9v2f3oVgnBhKfyr9/UbsYU/6cBL9OLRq+bZOVzaidZM=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64e.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bbX39qM0FPz3Q2zHx3UFtn+rN3bvW1SA8z+LBba4vno=
+			qJGZTn8hkc67xVC5sTpdCyxItZmllViUiJiu9wnH3dU=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64e.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Tb0YpH0xn+V+p/sWk7pgHsG+uOWGMjzpo8FtUC61wj0=
+			eOcbklioKhBKok5RAXhGe8DXNIBfVxLdFVtbYTQqsxo=
 			</data>
 		</dict>
 		<key>Modules/NomaePreferences.swiftmodule/arm64e.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			LtEbLqH6HNZkntJloWP+SCMm9JYoCFaBxJoADMmIjAE=
+			9v2f3oVgnBhKfyr9/UbsYU/6cBL9OLRq+bZOVzaidZM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -1,10 +1,17 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
 // swift-module-flags: -target arm64e-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name NomaePreferences
+import Combine
 @_exported import NomaePreferences
 import Swift
 import SwiftUI
 import UIKit
+public struct TwitterLogo : SwiftUI.Shape {
+  public init()
+  public func path(in rect: CoreGraphics.CGRect) -> SwiftUI.Path
+  public typealias AnimatableData = SwiftUI.EmptyAnimatableData
+  public typealias Body = SwiftUI._ShapeView<NomaePreferences.TwitterLogo, SwiftUI.ForegroundStyle>
+}
 public struct ColorField : SwiftUI.View {
   public init(_ title: Swift.String, selection: SwiftUI.Binding<Swift.String>)
   public var body: some SwiftUI.View {
@@ -13,11 +20,23 @@ public struct ColorField : SwiftUI.View {
   public typealias Body = @_opaqueReturnTypeOf("$s16NomaePreferences10ColorFieldV4bodyQrvp", 0) 🦸
 }
 public struct Header<Icon> : SwiftUI.View where Icon : SwiftUI.View {
-  public init(_ packageName: Swift.String, icon: Icon?, subtitle: Swift.String? = nil)
+  public init(_ packageName: Swift.String, icon: Icon? = nil, subtitle: Swift.String? = nil)
   public var body: some SwiftUI.View {
     get
   }
   public typealias Body = @_opaqueReturnTypeOf("$s16NomaePreferences6HeaderV4bodyQrvp", 0) 🦸<Icon>
+}
+public struct GitHubLogo : SwiftUI.Shape {
+  public init()
+  public func path(in rect: CoreGraphics.CGRect) -> SwiftUI.Path
+  public typealias AnimatableData = SwiftUI.EmptyAnimatableData
+  public typealias Body = SwiftUI._ShapeView<NomaePreferences.GitHubLogo, SwiftUI.ForegroundStyle>
+}
+public struct RedditLogo : SwiftUI.Shape {
+  public init()
+  public func path(in rect: CoreGraphics.CGRect) -> SwiftUI.Path
+  public typealias AnimatableData = SwiftUI.EmptyAnimatableData
+  public typealias Body = SwiftUI._ShapeView<NomaePreferences.RedditLogo, SwiftUI.ForegroundStyle>
 }
 @objc @_inheritsConvenienceInitializers open class NomaePreferencesController : NomaePreferences.PreferenceLoaderController {
   open var suiView: SwiftUI.AnyView
@@ -41,6 +60,12 @@ public struct Header<Icon> : SwiftUI.View where Icon : SwiftUI.View {
   public var projectedValue: SwiftUI.Binding<Value> {
     get
   }
+}
+@_hasMissingDesignatedInitializers @usableFromInline
+internal class Storage<Value> : ObjectiveC.NSObject, Combine.ObservableObject {
+  @objc deinit
+  @usableFromInline
+  internal typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
 }
 extension Preference where Value == Swift.Bool {
   public init(wrappedValue: Value, _ key: Swift.String, identifier: Swift.String)
