@@ -8,8 +8,7 @@
 
 import SwiftUI
 
-/// A header view to display a package name,
-/// an optional package icon, and an optional subtitle
+/// Header view to display a package name, an optional package icon, and an optional subtitle
 public struct Header<Icon: View>: View {
     let packageName: String
     let icon: Icon?

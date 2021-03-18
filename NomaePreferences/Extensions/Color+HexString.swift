@@ -8,19 +8,18 @@
 
 import SwiftUI
 
-extension Color {
+public extension Color {
     
+    /// Initialize a `Color` with a hex string of format `#000000:1.0`
     init?(hexString: String) {
         var hexString = hexString
-        if hexString.count < 1 { return nil }
-        if hexString.first != "#" { return nil }
+        guard hexString.first == "#" else { return nil }
         hexString.removeFirst()
         let split = hexString.split(separator: ":")
-        guard let first = split.first else { return nil }
-        if first.count != 6 { return nil }
-        var rgb: UInt64 = 0
+        guard let first = split.first, let last = split.last else { return nil }
+        guard first.count == 6 else { return nil }
+        var rgb = UInt64()
         Scanner(string: String(first)).scanHexInt64(&rgb)
-        guard let last = split.last else { return nil }
         guard let opacity = Double(last) else { return nil }
         self.init(
             red: Double((rgb & 0xFF0000) >> 16) / 255.0,
@@ -29,5 +28,4 @@ extension Color {
             opacity: opacity
         )
     }
-    
 }

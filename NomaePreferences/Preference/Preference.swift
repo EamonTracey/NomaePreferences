@@ -236,18 +236,6 @@ extension Preference where Value: RawRepresentable, Value.RawValue == Int {
     /// Creates a property that can read and write to an integer user default,
     /// transforming that to `RawRepresentable` data type.
     ///
-    /// A common usage is with enumerations:
-    ///
-    ///    enum MyEnum: Int {
-    ///        case a
-    ///        case b
-    ///        case c
-    ///    }
-    ///    struct MyView: View {
-    ///        @AppStorage("MyEnumValue") private var value = MyEnum.a
-    ///        var body: some View { ... }
-    ///    }
-    ///
     /// - Parameters:
     ///   - wrappedValue: The default value if an integer value
     ///     is not specified for the given key.
@@ -272,18 +260,6 @@ extension Preference where Value: RawRepresentable, Value.RawValue == String {
 
     /// Creates a property that can read and write to a string user default,
     /// transforming that to `RawRepresentable` data type.
-    ///
-    /// A common usage is with enumerations:
-    ///
-    ///    enum MyEnum: String {
-    ///        case a
-    ///        case b
-    ///        case c
-    ///    }
-    ///    struct MyView: View {
-    ///        @AppStorage("MyEnumValue") private var value = MyEnum.a
-    ///        var body: some View { ... }
-    ///    }
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a string value

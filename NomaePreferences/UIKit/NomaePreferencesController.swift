@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 /// A view controller that loads a SwiftUI `View`. Subclass this and override `suiView`
 open class NomaePreferencesController: PreferenceLoaderController {
     

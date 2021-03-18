@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-/// A TextField that displays the color of the corresponding
-/// hex color code if a valid hex color code is input.
+/// TextField that displays the color of the corresponding hex string input
+/// Intended for iOS 13 use since `ColorPicker` is unavailable
 public struct ColorField: View {
     let title: String
     @Binding var selection: String

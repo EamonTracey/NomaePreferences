@@ -17,6 +17,7 @@
 		63AF44B925FBCEF900AD297B /* TwitterLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AF44B825FBCEF900AD297B /* TwitterLogo.swift */; };
 		63AF44BF25FBCF5400AD297B /* RedditLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AF44BE25FBCF5400AD297B /* RedditLogo.swift */; };
 		63CE156725FB45F600A33AD3 /* GitHubLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CE156625FB45F600A33AD3 /* GitHubLogo.swift */; };
+		63EA5CEA2601481800A8AEE0 /* Color+RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA5CE92601481800A8AEE0 /* Color+RawRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		63AF44B825FBCEF900AD297B /* TwitterLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterLogo.swift; sourceTree = "<group>"; };
 		63AF44BE25FBCF5400AD297B /* RedditLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditLogo.swift; sourceTree = "<group>"; };
 		63CE156625FB45F600A33AD3 /* GitHubLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLogo.swift; sourceTree = "<group>"; };
+		63EA5CE92601481800A8AEE0 /* Color+RawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+RawRepresentable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				63981BBA25DF42BB002A7BA7 /* Color+HexString.swift */,
+				63EA5CE92601481800A8AEE0 /* Color+RawRepresentable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -157,7 +160,8 @@
 		634D769E25DF41B800E2326C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1240;
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Eamon Tracey";
 				TargetAttributes = {
 					634D76A625DF41B800E2326C = {
@@ -204,6 +208,7 @@
 				63981BB825DF42B0002A7BA7 /* ColorField.swift in Sources */,
 				63981BB525DF429B002A7BA7 /* Header.swift in Sources */,
 				63CE156725FB45F600A33AD3 /* GitHubLogo.swift in Sources */,
+				63EA5CEA2601481800A8AEE0 /* Color+RawRepresentable.swift in Sources */,
 				63AF44BF25FBCF5400AD297B /* RedditLogo.swift in Sources */,
 				63981BAF25DF427A002A7BA7 /* NomaePreferencesController.swift in Sources */,
 				63981BB225DF428B002A7BA7 /* PreferenceLoaderController.swift in Sources */,
@@ -219,8 +224,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = (
-					arm64,
 					arm64e,
+					arm64,
 				);
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -288,8 +293,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = (
-					arm64,
 					arm64e,
+					arm64,
 				);
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ANALYZER_NONNULL = YES;

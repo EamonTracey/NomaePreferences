@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.4 clang-1205.0.19.54)
 // swift-module-flags: -target arm64e-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name NomaePreferences
 import Combine
 @_exported import NomaePreferences
@@ -11,6 +11,9 @@ public struct TwitterLogo : SwiftUI.Shape {
   public func path(in rect: CoreGraphics.CGRect) -> SwiftUI.Path
   public typealias AnimatableData = SwiftUI.EmptyAnimatableData
   public typealias Body = SwiftUI._ShapeView<NomaePreferences.TwitterLogo, SwiftUI.ForegroundStyle>
+}
+extension Color {
+  public init?(hexString: Swift.String)
 }
 public struct ColorField : SwiftUI.View {
   public init(_ title: Swift.String, selection: SwiftUI.Binding<Swift.String>)
@@ -32,6 +35,13 @@ public struct GitHubLogo : SwiftUI.Shape {
   public typealias AnimatableData = SwiftUI.EmptyAnimatableData
   public typealias Body = SwiftUI._ShapeView<NomaePreferences.GitHubLogo, SwiftUI.ForegroundStyle>
 }
+extension Color : Swift.RawRepresentable {
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+  public typealias RawValue = Swift.String
+}
 public struct RedditLogo : SwiftUI.Shape {
   public init()
   public func path(in rect: CoreGraphics.CGRect) -> SwiftUI.Path
@@ -41,9 +51,9 @@ public struct RedditLogo : SwiftUI.Shape {
 @objc @_inheritsConvenienceInitializers open class NomaePreferencesController : NomaePreferences.PreferenceLoaderController {
   open var suiView: SwiftUI.AnyView
   @objc override dynamic public func loadView()
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @objcMembers open class PreferenceLoaderController : UIKit.UIViewController {
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
