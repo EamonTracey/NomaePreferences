@@ -2,7 +2,7 @@
 //  Color+RawRepresentable.swift
 //  NomaePreferences
 //
-//  Created by Eamon Tracey on 3/16/21.
+//  Created by Eamon Tracey.
 //  Copyright © 2021 Eamon Tracey. All rights reserved.
 //
 
