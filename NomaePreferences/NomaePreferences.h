@@ -37,7 +37,5 @@ FOUNDATION_EXPORT const unsigned char NomaePreferencesVersionString[];
 @interface NSTask: NSObject
 - (void)setArguments:(nullable NSArray *)arguments;
 - (void)setLaunchPath:(nullable NSString *)launchPath;
-- (NSInteger)terminationStatus;
 - (void)launch;
-- (void)waitUntilExit;
 @end
