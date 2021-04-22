@@ -29,6 +29,7 @@
 //          is created. Due to cfprefsd internals and because we provided an absolute path as
 //          the suite name, the given file path will be used to store preferences. Thus, the
 //          preferences can be accessed in any process.
+//      - Added support for storing Array-like objects
 //
 
 import Combine
@@ -92,21 +93,11 @@ class Storage<Value>: NSObject, ObservableObject {
 }
 
 extension Preference where Value == Bool {
-
-    /// Creates a property that can read and write to a boolean user default.
-    ///
-    /// - Parameters:
-    ///   - wrappedValue: The default value if a boolean value is not specified
-    ///     for the given key.
-    ///   - key: The key to read and write the value to in the user defaults
-    ///     store.
-    ///   - store: The user defaults store to read and write to. A value
-    ///     of `nil` will use the user default store from the environment.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
+        let initialValue = store.object(forKey: key) as? Bool ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? Value
+            $0 as? Bool
         }, saveValue: { newValue in
             store.set(newValue, forKey: key)
         })
@@ -114,20 +105,11 @@ extension Preference where Value == Bool {
 }
 
 extension Preference where Value == Int {
-    /// Creates a property that can read and write to an integer user default.
-    ///
-    /// - Parameters:
-    ///   - wrappedValue: The default value if an integer value is not specified
-    ///     for the given key.
-    ///   - key: The key to read and write the value to in the user defaults
-    ///     store.
-    ///   - store: The user defaults store to read and write to. A value
-    ///     of `nil` will use the user default store from the environment.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
+        let initialValue = store.object(forKey: key) as? Int ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? Value
+            $0 as? Int
         }, saveValue: { newValue in
             store.set(newValue, forKey: key)
         })
@@ -135,21 +117,11 @@ extension Preference where Value == Int {
 }
 
 extension Preference where Value == Double {
-
-    /// Creates a property that can read and write to a double user default.
-    ///
-    /// - Parameters:
-    ///   - wrappedValue: The default value if a double value is not specified
-    ///     for the given key.
-    ///   - key: The key to read and write the value to in the user defaults
-    ///     store.
-    ///   - store: The user defaults store to read and write to. A value
-    ///     of `nil` will use the user default store from the environment.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
+        let initialValue = store.object(forKey: key) as? Double ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? Value
+            $0 as? Double
         }, saveValue: { newValue in
             store.set(newValue, forKey: key)
         })
@@ -157,43 +129,11 @@ extension Preference where Value == Double {
 }
 
 extension Preference where Value == String {
-
-    /// Creates a property that can read and write to a string user default.
-    ///
-    /// - Parameters:
-    ///   - wrappedValue: The default value if a string value is not specified
-    ///     for the given key.
-    ///   - key: The key to read and write the value to in the user defaults
-    ///     store.
-    ///   - store: The user defaults store to read and write to. A value
-    ///     of `nil` will use the user default store from the environment.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
+        let initialValue = store.object(forKey: key) as? String ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? Value
-        }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
-        })
-    }
-}
-
-extension Preference where Value == URL {
-
-    /// Creates a property that can read and write to a url user default.
-    ///
-    /// - Parameters:
-    ///   - wrappedValue: The default value if a url value is not specified for
-    ///     the given key.
-    ///   - key: The key to read and write the value to in the user defaults
-    ///     store.
-    ///   - store: The user defaults store to read and write to. A value
-    ///     of `nil` will use the user default store from the environment.
-    public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
-        self.init(value: initialValue, store: store, key: key, transform: {
-            ($0 as? String).flatMap(URL.init)
+            $0 as? String
         }, saveValue: { newValue in
             store.set(newValue, forKey: key)
         })
@@ -201,44 +141,30 @@ extension Preference where Value == URL {
 }
 
 extension Preference where Value == Data {
-
-    /// Creates a property that can read and write to a user default as data.
-    ///
-    /// Avoid storing large data blobs in user defaults, such as image data,
-    /// as it can negatively affect performance of your app. On tvOS, a
-    /// `NSUserDefaultsSizeLimitExceededNotification` notification is posted
-    /// if the total user default size reaches 512kB.
-    ///
-    /// - Parameters:
-    ///   - wrappedValue: The default value if a data value is not specified for
-    ///    the given key.
-    ///   - key: The key to read and write the value to in the user defaults
-    ///     store.
-    ///   - store: The user defaults store to read and write to. A value
-    ///     of `nil` will use the user default store from the environment.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
+        let initialValue = store.object(forKey: key) as? Data ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? Value
+            $0 as? Data
         }, saveValue: { newValue in
             store.set(newValue, forKey: key)
         })
     }
 }
 
-extension Preference where Value: RawRepresentable, Value.RawValue == Int {
+extension Preference where Value == URL {
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
+        let initialValue = store.object(forKey: key) as? URL ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            ($0 as? String).flatMap(URL.init)
+        }, saveValue: { newValue in
+            store.set(newValue.absoluteString, forKey: key)
+        })
+    }
+}
 
-    /// Creates a property that can read and write to an integer user default,
-    /// transforming that to `RawRepresentable` data type.
-    ///
-    /// - Parameters:
-    ///   - wrappedValue: The default value if an integer value
-    ///     is not specified for the given key.
-    ///   - key: The key to read and write the value to in the user defaults
-    ///     store.
-    ///   - store: The user defaults store to read and write to. A value
-    ///     of `nil` will use the user default store from the environment.
+extension Preference where Value: RawRepresentable, Value.RawValue == Int {
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let rawValue = store.object(forKey: key) as? Int
@@ -252,17 +178,6 @@ extension Preference where Value: RawRepresentable, Value.RawValue == Int {
 }
 
 extension Preference where Value: RawRepresentable, Value.RawValue == String {
-
-    /// Creates a property that can read and write to a string user default,
-    /// transforming that to `RawRepresentable` data type.
-    ///
-    /// - Parameters:
-    ///   - wrappedValue: The default value if a string value
-    ///     is not specified for the given key.
-    ///   - key: The key to read and write the value to in the user defaults
-    ///     store.
-    ///   - store: The user defaults store to read and write to. A value
-    ///     of `nil` will use the user default store from the environment.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let rawValue = store.object(forKey: key) as? String
@@ -271,6 +186,105 @@ extension Preference where Value: RawRepresentable, Value.RawValue == String {
             ($0 as? String).flatMap(Value.init)
         }, saveValue: { newValue in
             store.set(newValue.rawValue, forKey: key)
+        })
+    }
+}
+
+extension Preference where Value == [Bool] {
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
+        let initialValue = store.object(forKey: key) as? [Bool] ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            $0 as? [Bool]
+        }, saveValue: { newValue in
+            store.set(newValue, forKey: key)
+        })
+    }
+}
+
+extension Preference where Value == [Int] {
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
+        let initialValue = store.object(forKey: key) as? [Int] ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            $0 as? [Int]
+        }, saveValue: { newValue in
+            store.set(newValue, forKey: key)
+        })
+    }
+}
+
+extension Preference where Value == [Double] {
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
+        let initialValue = store.object(forKey: key) as? [Double] ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            $0 as? [Double]
+        }, saveValue: { newValue in
+            store.set(newValue, forKey: key)
+        })
+    }
+}
+
+extension Preference where Value == [String] {
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
+        let initialValue = store.object(forKey: key) as? [String] ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            $0 as? [String]
+        }, saveValue: { newValue in
+            store.set(newValue, forKey: key)
+        })
+    }
+}
+
+extension Preference where Value == [Data] {
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
+        let initialValue = store.object(forKey: key) as? [Data] ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            $0 as? [Data]
+        }, saveValue: { newValue in
+            store.set(newValue, forKey: key)
+        })
+    }
+}
+
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == URL {
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
+        let stringArray = store.object(forKey: key) as? [String]
+        let initialValue = stringArray?.compactMap(URL.init) as? Value ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            ($0 as? [String])?.compactMap(URL.init) as? Value
+        }, saveValue: { newValue in
+            store.set((newValue as? [URL])?.compactMap { $0.absoluteString }, forKey: key)
+        })
+    }
+}
+
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement: RawRepresentable, Value.ArrayLiteralElement.RawValue == Int {
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
+        let rawArray = store.object(forKey: key) as? [Int]
+        let initialValue = rawArray?.compactMap(Value.ArrayLiteralElement.init) as? Value ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            ($0 as? [Int])?.compactMap(Value.ArrayLiteralElement.init) as? Value
+        }, saveValue: { newValue in
+            store.set((newValue as? [Value.ArrayLiteralElement])?.compactMap { $0.rawValue }, forKey: key)
+        })
+    }
+}
+
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement: RawRepresentable, Value.ArrayLiteralElement.RawValue == String {
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
+        let rawArray = store.object(forKey: key) as? [String]
+        let initialValue = rawArray?.compactMap(Value.ArrayLiteralElement.init) as? Value ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            ($0 as? [String])?.compactMap(Value.ArrayLiteralElement.init) as? Value
+        }, saveValue: { newValue in
+            store.set((newValue as? [Value.ArrayLiteralElement])?.compactMap { $0.rawValue }, forKey: key)
         })
     }
 }

@@ -10,9 +10,9 @@ import SwiftUI
 
 /// Header view to display a package name, an optional package icon, and an optional subtitle
 public struct Header<Icon: View>: View {
-    let packageName: String
-    let icon: Icon?
-    let subtitle: String?
+    private let packageName: String
+    private let icon: Icon?
+    private let subtitle: String?
     
     public init(_ packageName: String, icon: Icon? = nil, subtitle: String? = nil) {
         self.packageName = packageName
