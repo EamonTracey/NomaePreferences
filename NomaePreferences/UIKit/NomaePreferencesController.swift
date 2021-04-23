@@ -12,7 +12,7 @@ import SwiftUI
 /// Subclass this and override `suiView`.
 open class NomaePreferencesController: PreferenceLoaderController {
     
-    /// SwiftUI `View` to override with your custom preferences view
+    /// SwiftUI `View` to override with your custom preferences view.
     open var suiView: AnyView = AnyView(EmptyView())
     
     override public func loadView() {
