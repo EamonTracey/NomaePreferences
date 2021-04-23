@@ -140,6 +140,18 @@ extension Preference where Value == Data {
     }
 }
 
+extension Preference where Value == Date {
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
+        let initialValue = store.object(forKey: key) as? Date ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            $0 as? Date
+        }, saveValue: { newValue in
+            store.set(newValue, forKey: key)
+        })
+    }
+}
+
 extension Preference where Value == URL {
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
@@ -215,6 +227,18 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
 }
 
 extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == Data {
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
+        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            $0 as? Value
+        }, saveValue: { newValue in
+            store.set(newValue, forKey: key)
+        })
+    }
+}
+
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == Date {
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
