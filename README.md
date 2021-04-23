@@ -34,7 +34,7 @@ Link NomaePreferences in the Makefile
 SomeTweak_FRAMEWORKS += NomaePreferences
 ````
 
-Add NomaePreferences as a dependency in the control
+Add NomaePreferences as a dependency in the control file
 ```
 Depends: com.eamontracey.nomaepreferences
 ```
