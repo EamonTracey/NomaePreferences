@@ -9,7 +9,7 @@
 import SwiftUI
 
 /// The Discord logo as a SwiftUI `Shape`
-struct DiscordLogo: Shape {
+public struct DiscordLogo: Shape {
     
     public init() { }
     
