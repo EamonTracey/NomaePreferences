@@ -104,24 +104,12 @@ extension Preference where Value == Bool {
     }
 }
 
-extension Preference where Value == Int {
+extension Preference where Value: Numeric {
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Int ?? wrappedValue
+        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? Int
-        }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
-        })
-    }
-}
-
-extension Preference where Value == Double {
-    public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Double ?? wrappedValue
-        self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? Double
+            $0 as? Value
         }, saveValue: { newValue in
             store.set(newValue, forKey: key)
         })
@@ -164,13 +152,13 @@ extension Preference where Value == URL {
     }
 }
 
-extension Preference where Value: RawRepresentable, Value.RawValue == Int {
+extension Preference where Value: RawRepresentable, Value.RawValue: Numeric {
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let rawValue = store.object(forKey: key) as? Int
+        let rawValue = store.object(forKey: key) as? Value.RawValue
         let initialValue = rawValue.flatMap(Value.init) ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            ($0 as? Int).flatMap(Value.init)
+            ($0 as? Value.RawValue).flatMap(Value.init)
         }, saveValue: { newValue in
             store.set(newValue.rawValue, forKey: key)
         })
@@ -190,60 +178,48 @@ extension Preference where Value: RawRepresentable, Value.RawValue == String {
     }
 }
 
-extension Preference where Value == [Bool] {
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == Bool {
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? [Bool] ?? wrappedValue
+        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? [Bool]
+            $0 as? Value
         }, saveValue: { newValue in
             store.set(newValue, forKey: key)
         })
     }
 }
 
-extension Preference where Value == [Int] {
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement: Numeric {
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? [Int] ?? wrappedValue
+        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? [Int]
+            $0 as? Value
         }, saveValue: { newValue in
             store.set(newValue, forKey: key)
         })
     }
 }
 
-extension Preference where Value == [Double] {
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == String {
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? [Double] ?? wrappedValue
+        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? [Double]
+            $0 as? Value
         }, saveValue: { newValue in
             store.set(newValue, forKey: key)
         })
     }
 }
 
-extension Preference where Value == [String] {
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == Data {
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? [String] ?? wrappedValue
+        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? [String]
-        }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
-        })
-    }
-}
-
-extension Preference where Value == [Data] {
-    public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? [Data] ?? wrappedValue
-        self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? [Data]
+            $0 as? Value
         }, saveValue: { newValue in
             store.set(newValue, forKey: key)
         })
@@ -263,13 +239,13 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
     }
 }
 
-extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement: RawRepresentable, Value.ArrayLiteralElement.RawValue == Int {
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement: RawRepresentable, Value.ArrayLiteralElement.RawValue: Numeric {
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let rawArray = store.object(forKey: key) as? [Int]
+        let rawArray = store.object(forKey: key) as? [Value.ArrayLiteralElement.RawValue]
         let initialValue = rawArray?.compactMap(Value.ArrayLiteralElement.init) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            ($0 as? [Int])?.compactMap(Value.ArrayLiteralElement.init) as? Value
+            ($0 as? [Value.ArrayLiteralElement.RawValue])?.compactMap(Value.ArrayLiteralElement.init) as? Value
         }, saveValue: { newValue in
             store.set((newValue as? [Value.ArrayLiteralElement])?.compactMap { $0.rawValue }, forKey: key)
         })
