@@ -29,5 +29,19 @@ struct RootPreferences: View {
 }
 ```
 
+Link NomaePreferences in the MakeFile
+
+Makefile
+```makefile
+SomeTweak_FRAMEWORKS += NomaePreferences
+````
+
+Add NomaePreferences as a dependency
+
+Control
+```
+Depends: com.eamontracey.nomaepreferences
+```
+
 ## Credits
 Huge thank you to [Kabir](https://github.com/kabiroberai) for help debugging and fixing various Swift/Xcode problems
