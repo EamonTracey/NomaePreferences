@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-/// The Reddit logo as a SwiftUI `Shape`
+/// The Reddit logo as a SwiftUI `Shape`.
 public struct RedditLogo: Shape {
     
     public init() { }

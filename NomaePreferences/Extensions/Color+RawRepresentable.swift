@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-/// Conform `Color` to `RawRepresentable` for use with `Preference` and `ColorPicker`
+/// Conform `Color` to `RawRepresentable` for use with `Preference` and `ColorPicker`.
 extension Color: RawRepresentable {
     public init?(rawValue: String) {
         guard #available(iOS 14, *) else { fatalError("do not use Color RawRepresentable conformity below iOS 14") }

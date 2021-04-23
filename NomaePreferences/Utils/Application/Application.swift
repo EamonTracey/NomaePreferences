@@ -9,7 +9,7 @@
 import MobileCoreServices
 import Foundation
 
-/// A representation of an iOS application
+/// A representation of an iOS application wrapped around `LSApplicationProxy`.
 public struct Application {
     public let bundleID: String
     public let proxy: LSApplicationProxy

@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Respring the device by sending SIGKILL to SpringBoard
+/// Respring the device by sending SIGKILL to SpringBoard.
 public func respring() {
     shell("/usr/bin/killall", args: ["-9", "SpringBoard"])
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Conform `Application` to `Hashable`
+/// Conform `Application` to `Hashable`.
 extension Application: Hashable {
     
 }

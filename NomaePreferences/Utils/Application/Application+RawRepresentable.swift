@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Conform `Application` to `RawRepresentable` using `bundleID` as `rawValue`
+/// Conform `Application` to `RawRepresentable` using `bundleID` as `rawValue`.
 extension Application: RawRepresentable {
     public init?(rawValue: String) {
         self = Application(rawValue)

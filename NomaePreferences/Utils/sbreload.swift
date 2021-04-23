@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Respring the device by running sbreload
+/// Respring the device by running sbreload.
 public func sbreload() {
     shell("/usr/bin/sbreload")
 }

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-/// The GitHub logo as a SwiftUI `Shape`
+/// The GitHub logo as a SwiftUI `Shape`.
 public struct GitHubLogo: Shape {
     
     public init() { }
