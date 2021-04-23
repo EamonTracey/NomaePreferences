@@ -29,14 +29,12 @@ struct RootPreferences: View {
 }
 ```
 
-Link NomaePreferences in the Makeile
-Makefile
+Link NomaePreferences in the Makefile
 ```makefile
 SomeTweak_FRAMEWORKS += NomaePreferences
 ````
 
-Add NomaePreferences as a dependency
-Control
+Add NomaePreferences as a dependency in the control
 ```
 Depends: com.eamontracey.nomaepreferences
 ```
