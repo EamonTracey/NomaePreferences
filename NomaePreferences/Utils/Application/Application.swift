@@ -11,16 +11,19 @@ import Foundation
 
 /// A representation of an iOS application wrapped around `LSApplicationProxy`.
 public struct Application {
-    /// TODO
+    /// The bundle identifier of the application.
     public let bundleID: String
-    /// TODO
+    /// An `LSApplicationProxy` instantiated from the bundle identifier.
     public let proxy: LSApplicationProxy
-    /// TODO
+    /// The display name of the application.
     public let name: String?
-    /// TODO
+    /// The icon of the application with 40x40 resolution.
     public let icon: UIImage?
     
-    /// TODO
+    /// Creates an `Application` instance.
+    ///
+    /// - Parameters:
+    ///     - bundleID : The bundle identifier of the application.
     public init(_ bundleID: String) {
         self.bundleID = bundleID
         self.proxy = LSApplicationProxy(forIdentifier: bundleID)
@@ -28,7 +31,7 @@ public struct Application {
         self.icon = UIImage._applicationIconImage(forBundleIdentifier: bundleID, format: 1)
     }
     
-    /// TODO
+    /// Returns an array of all installed applications, including system applications.
     public static var allInstalledApplications: [Application] {
         LSApplicationWorkspace.default().allInstalledApplications().map { Application($0.applicationIdentifier()!) }
     }
