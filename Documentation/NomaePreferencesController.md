@@ -19,7 +19,7 @@ class PreferencesController: NomaePreferencesController {
 
 ## Inheritance
 
-[`PreferenceLoaderController`](/PreferenceLoaderController)
+[`PreferenceLoaderController`](https://github.com/EamonTracey/NomaePreferences/wiki/PreferenceLoaderController)
 
 ## Properties
 

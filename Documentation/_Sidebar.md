@@ -1,23 +1,23 @@
 <details>
 <summary>Types</summary>
 
-  - [Application](/Application)
-  - [DiscordLogo](/DiscordLogo)
-  - [GitHubLogo](/GitHubLogo)
-  - [Header](/Header)
-  - [NomaePreferencesController](/NomaePreferencesController)
-  - [Preference](/Preference)
-  - [PreferenceLoaderController](/PreferenceLoaderController)
-  - [RedditLogo](/RedditLogo)
-  - [TwitterLogo](/TwitterLogo)
+  - [Application](https://github.com/EamonTracey/NomaePreferences/wiki/Application)
+  - [DiscordLogo](https://github.com/EamonTracey/NomaePreferences/wiki/DiscordLogo)
+  - [GitHubLogo](https://github.com/EamonTracey/NomaePreferences/wiki/GitHubLogo)
+  - [Header](https://github.com/EamonTracey/NomaePreferences/wiki/Header)
+  - [NomaePreferencesController](https://github.com/EamonTracey/NomaePreferences/wiki/NomaePreferencesController)
+  - [Preference](https://github.com/EamonTracey/NomaePreferences/wiki/Preference)
+  - [PreferenceLoaderController](https://github.com/EamonTracey/NomaePreferences/wiki/PreferenceLoaderController)
+  - [RedditLogo](https://github.com/EamonTracey/NomaePreferences/wiki/RedditLogo)
+  - [TwitterLogo](https://github.com/EamonTracey/NomaePreferences/wiki/TwitterLogo)
 
 </details>
 
 <details>
 <summary>Global Functions</summary>
 
-  - [respring()](/respring\(\))
-  - [sbreload()](/sbreload\(\))
-  - [shell(\_:args:)](/shell\(_:args:\))
+  - [respring()](https://github.com/EamonTracey/NomaePreferences/wiki/respring\(\))
+  - [sbreload()](https://github.com/EamonTracey/NomaePreferences/wiki/sbreload\(\))
+  - [shell(\_:args:)](https://github.com/EamonTracey/NomaePreferences/wiki/shell\(_:args:\))
 
 </details>

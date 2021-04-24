@@ -1,31 +1,31 @@
 # Types
 
-  - [Preference](/Preference):
+  - [Preference](https://github.com/EamonTracey/NomaePreferences/wiki/Preference):
     A property wrapper type that reflects a value from `UserDefaults` and
     invalidates a view on a change in value in that user default.
-  - [NomaePreferencesController](/NomaePreferencesController):
+  - [NomaePreferencesController](https://github.com/EamonTracey/NomaePreferences/wiki/NomaePreferencesController):
     A `PreferenceLoaderController` subclass that loads a SwiftUI `View`.
-  - [PreferenceLoaderController](/PreferenceLoaderController):
+  - [PreferenceLoaderController](https://github.com/EamonTracey/NomaePreferences/wiki/PreferenceLoaderController):
     A view controller containing`PSViewController` methods that
     PreferenceLoader automatically calls.
-  - [Application](/Application):
+  - [Application](https://github.com/EamonTracey/NomaePreferences/wiki/Application):
     A representation of an iOS application wrapped around `LSApplicationProxy`.
-  - [Header](/Header):
+  - [Header](https://github.com/EamonTracey/NomaePreferences/wiki/Header):
     Header view to display a package name, an optional package icon, and an optional subtitle.
-  - [DiscordLogo](/DiscordLogo):
+  - [DiscordLogo](https://github.com/EamonTracey/NomaePreferences/wiki/DiscordLogo):
     The Discord logo as a SwiftUI `Shape`.
-  - [GitHubLogo](/GitHubLogo):
+  - [GitHubLogo](https://github.com/EamonTracey/NomaePreferences/wiki/GitHubLogo):
     The GitHub logo as a SwiftUI `Shape`.
-  - [RedditLogo](/RedditLogo):
+  - [RedditLogo](https://github.com/EamonTracey/NomaePreferences/wiki/RedditLogo):
     The Reddit logo as a SwiftUI `Shape`.
-  - [TwitterLogo](/TwitterLogo):
+  - [TwitterLogo](https://github.com/EamonTracey/NomaePreferences/wiki/TwitterLogo):
     The Twitter logo as a SwiftUI `Shape`.
 
 # Global Functions
 
-  - [respring()](/respring\(\)):
+  - [respring()](https://github.com/EamonTracey/NomaePreferences/wiki/respring\(\)):
     Respring the device by sending SIGKILL to SpringBoard.
-  - [sbreload()](/sbreload\(\)):
+  - [sbreload()](https://github.com/EamonTracey/NomaePreferences/wiki/sbreload\(\)):
     Respring the device by running sbreload.
-  - [shell(\_:​args:​)](/shell\(_:args:\)):
+  - [shell(\_:​args:​)](https://github.com/EamonTracey/NomaePreferences/wiki/shell\(_:args:\)):
     Perform a shell command.
