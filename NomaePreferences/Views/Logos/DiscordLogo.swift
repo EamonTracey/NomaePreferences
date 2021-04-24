@@ -75,3 +75,9 @@ public struct DiscordLogo: Shape {
     }
     
 }
+
+struct DiscordLogo_Previews: PreviewProvider {
+    static var previews: some View {
+        GitHubLogo()
+    }
+}
