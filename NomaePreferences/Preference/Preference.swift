@@ -212,7 +212,8 @@ extension Preference where Value: RawRepresentable, Value.RawValue: Numeric {
     ///         case c
     ///     }
     ///     struct RootPreferences: View {
-    ///         @Preference("SomeEnumValue") private var value = SomeEnum.a
+    ///         @Preference("someEnumValue") private var value = SomeEnum.a
+    ///
     ///         var body: some View { ... }
     ///     }
     ///
@@ -237,17 +238,19 @@ extension Preference where Value: RawRepresentable, Value.RawValue == String {
     /// Creates a property that can read and write to a `String` user default,
     /// transforming that to `RawRepresentable` data type.
     ///
-    /// A common usage is with enumerations:
+    /// This allows for storing `Color`s and using `ColorPicker`:
     ///
-    ///     enum SomeEnum: String {
-    ///         case a
-    ///         case b
-    ///         case c
-    ///     }
     ///     struct RootPreferences: View {
-    ///         @Preference("SomeEnumValue") private var value = SomeEnum.a
-    ///         var body: some View { ... }
+    ///         @Preference("someColor") private var color = Color.white
+    ///
+    ///         var body: some View {
+    ///             Form {
+    ///                 ColorPicker("Color", selection: $color)
+    ///             }
+    ///         }
     ///     }
+    ///
+    /// This also allows for storing `Application`s.
     ///
     /// - Parameters:
     ///   - wrappedValue: The default value if a `String` `RawRepresentable` value is
