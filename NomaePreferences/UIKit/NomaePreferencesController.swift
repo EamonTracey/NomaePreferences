@@ -8,11 +8,19 @@
 
 import SwiftUI
 
-/// A view controller that loads a SwiftUI `View`.
-/// Subclass this and override `suiView`.
+/// A `PreferenceLoaderController` subclass that loads a SwiftUI `View`.
+///
+/// Example usage:
+///
+///     class PreferencesController: NomaePreferencesController {
+///         override var suiView {
+///             get { AnyView(RootPreferences()) }
+///             set { super.suiView = newValue }
+///         }
+///     }
 open class NomaePreferencesController: PreferenceLoaderController {
     
-    /// SwiftUI `View` to override with your custom preferences view.
+    /// SwiftUI `View` to be overridden with a custom view.
     open var suiView: AnyView = AnyView(EmptyView())
     
     override public func loadView() {

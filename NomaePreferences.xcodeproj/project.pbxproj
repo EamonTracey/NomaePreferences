@@ -24,6 +24,7 @@
 		63B2DF2E26322A6A0042BF12 /* sbreload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2DF2D26322A6A0042BF12 /* sbreload.swift */; };
 		63CE156725FB45F600A33AD3 /* GitHubLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CE156625FB45F600A33AD3 /* GitHubLogo.swift */; };
 		63EA5CEA2601481800A8AEE0 /* Color+RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA5CE92601481800A8AEE0 /* Color+RawRepresentable.swift */; };
+		63EF0E592633A9B200F931C4 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 63EF0E582633A9B200F931C4 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		63B2DF2D26322A6A0042BF12 /* sbreload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sbreload.swift; sourceTree = "<group>"; };
 		63CE156625FB45F600A33AD3 /* GitHubLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLogo.swift; sourceTree = "<group>"; };
 		63EA5CE92601481800A8AEE0 /* Color+RawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+RawRepresentable.swift"; sourceTree = "<group>"; };
+		63EF0E582633A9B200F931C4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				63981BAB25DF425F002A7BA7 /* Preference.swift */,
+				63EF0E582633A9B200F931C4 /* LICENSE */,
 			);
 			path = Preference;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63EF0E592633A9B200F931C4 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

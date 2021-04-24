@@ -1,35 +1,20 @@
-// MIT License
 //
-// Copyright (c) 2020 Xavier Lowmiller
+//  Preference.swift
+//  NomaePreferences
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-//
+//  Created by Eamon Tracey.
+//  Copyright © 2021 Eamon Tracey. All rights reserved.
 //
 // The majority of code in this file is from https://github.com/xavierLowmiller/AppStorage
 // The following changes have been made:
-//      - `AppStorage` renamed to `Preference` (typealias removed)
+//      - `AppStorage` renamed to `Preference` (typealias removed).
 //      - Rather than initializing with a UserDefaults object, a `String` identifier is used.
 //          UserDefaults with suite name "/var/mobile/Library/Preferences/\(identifier).plist"
 //          is created. Due to cfprefsd internals and because we provided an absolute path as
 //          the suite name, the given file path will be used to store preferences. Thus, the
 //          preferences can be accessed in any process.
-//      - Added support for storing Array-like objects
+//      - Support storing `Numeric`s rather than only `Int`s and `Double`s.
+//      - Added support for storing `Array`-like objects.
 //
 
 import Combine
@@ -37,6 +22,21 @@ import SwiftUI
 
 /// A property wrapper type that reflects a value from `UserDefaults` and
 /// invalidates a view on a change in value in that user default.
+///
+/// Example usage:
+///
+///     let identifier = "com.somedomain.sometweak"
+///
+///     struct RootPreferences: View {
+///         @Preference("enabled", identifier: identifier) var enabled = true
+///
+///         var body: some View {
+///             Form {
+///                 Toggle("Enabled", isOn: $enabled)
+///             }
+///             .navigationBarTitle("SomeTweak")
+///         }
+///     }
 @frozen @propertyWrapper public struct Preference<Value>: DynamicProperty {
     @ObservedObject private var _value: Storage<Value>
     private let saveValue: (Value) -> Void
@@ -93,6 +93,12 @@ class Storage<Value>: NSObject, ObservableObject {
 }
 
 extension Preference where Value == Bool {
+    /// Creates a property that can read and write to a `Bool` user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if a `Bool` value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let initialValue = store.object(forKey: key) as? Bool ?? wrappedValue
@@ -105,6 +111,12 @@ extension Preference where Value == Bool {
 }
 
 extension Preference where Value: Numeric {
+    /// Creates a property that can read and write to a `Numeric` user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if a `Numeric` value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
@@ -117,6 +129,12 @@ extension Preference where Value: Numeric {
 }
 
 extension Preference where Value == String {
+    /// Creates a property that can read and write to a `String` user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if a `String` value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let initialValue = store.object(forKey: key) as? String ?? wrappedValue
@@ -129,6 +147,12 @@ extension Preference where Value == String {
 }
 
 extension Preference where Value == Data {
+    /// Creates a property that can read and write to a `Data` user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if a `Data` value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let initialValue = store.object(forKey: key) as? Data ?? wrappedValue
@@ -141,6 +165,12 @@ extension Preference where Value == Data {
 }
 
 extension Preference where Value == Date {
+    /// Creates a property that can read and write to a `Date` user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if a `Date` value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let initialValue = store.object(forKey: key) as? Date ?? wrappedValue
@@ -153,6 +183,12 @@ extension Preference where Value == Date {
 }
 
 extension Preference where Value == URL {
+    /// Creates a property that can read and write to a `URL` user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if a `URL` value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let initialValue = store.object(forKey: key) as? URL ?? wrappedValue
@@ -165,6 +201,26 @@ extension Preference where Value == URL {
 }
 
 extension Preference where Value: RawRepresentable, Value.RawValue: Numeric {
+    /// Creates a property that can read and write to a `Numeric` user default,
+    /// transforming that to `RawRepresentable` data type.
+    ///
+    /// A common usage is with enumerations:
+    ///
+    ///     enum SomeEnum: Int {
+    ///         case a
+    ///         case b
+    ///         case c
+    ///     }
+    ///     struct RootPreferences: View {
+    ///         @Preference("SomeEnumValue") private var value = SomeEnum.a
+    ///         var body: some View { ... }
+    ///     }
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if a `Numeric` `RawRepresentable` value is
+    ///     not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let rawValue = store.object(forKey: key) as? Value.RawValue
@@ -178,6 +234,26 @@ extension Preference where Value: RawRepresentable, Value.RawValue: Numeric {
 }
 
 extension Preference where Value: RawRepresentable, Value.RawValue == String {
+    /// Creates a property that can read and write to a `String` user default,
+    /// transforming that to `RawRepresentable` data type.
+    ///
+    /// A common usage is with enumerations:
+    ///
+    ///     enum SomeEnum: String {
+    ///         case a
+    ///         case b
+    ///         case c
+    ///     }
+    ///     struct RootPreferences: View {
+    ///         @Preference("SomeEnumValue") private var value = SomeEnum.a
+    ///         var body: some View { ... }
+    ///     }
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if a `String` `RawRepresentable` value is
+    ///     not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let rawValue = store.object(forKey: key) as? String
@@ -191,6 +267,12 @@ extension Preference where Value: RawRepresentable, Value.RawValue == String {
 }
 
 extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == Bool {
+    /// Creates a property that can read and write to an `Array`-like set of `Bool`s user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if an `Array`-like set of `Bool`s  value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
@@ -203,6 +285,12 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
 }
 
 extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement: Numeric {
+    /// Creates a property that can read and write to an `Array`-like set of `Numeric`s user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if an `Array`-like set of `Numeric`s  value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
@@ -215,6 +303,12 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
 }
 
 extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == String {
+    /// Creates a property that can read and write to an `Array`-like set of `String`s user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if an `Array`-like set of `String`s  value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
@@ -227,6 +321,12 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
 }
 
 extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == Data {
+    /// Creates a property that can read and write to an `Array`-like set of `Data`s user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if an `Array`-like set of `Data`s  value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
@@ -239,6 +339,12 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
 }
 
 extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == Date {
+    /// Creates a property that can read and write to an `Array`-like set of `Date`s user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if an `Array`-like set of `Date`s  value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
@@ -251,6 +357,12 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
 }
 
 extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == URL {
+    /// Creates a property that can read and write to an `Array`-like set of `URL`s user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if an `Array`-like set of `URL`s  value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let stringArray = store.object(forKey: key) as? [String]
@@ -264,6 +376,14 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
 }
 
 extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement: RawRepresentable, Value.ArrayLiteralElement.RawValue: Numeric {
+    /// Creates a property that can read and write to an `Array`-like set of `Numeric`s user default,
+    /// transforming that to an `Array`-like set of  `RawRepresentable` data type.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if an `Array`-like set of  `Numeric` `RawRepresentable`value is
+    ///     not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let rawArray = store.object(forKey: key) as? [Value.ArrayLiteralElement.RawValue]
@@ -277,6 +397,14 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
 }
 
 extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement: RawRepresentable, Value.ArrayLiteralElement.RawValue == String {
+    /// Creates a property that can read and write to an `Array`-like set of `String`s user default,
+    /// transforming that to an `Array`-like set of  `RawRepresentable` data type.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if an `Array`-like set of  `String` `RawRepresentable`value is
+    ///     not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
         let rawArray = store.object(forKey: key) as? [String]
