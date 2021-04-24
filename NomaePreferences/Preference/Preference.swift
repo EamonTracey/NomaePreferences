@@ -211,6 +211,7 @@ extension Preference where Value: RawRepresentable, Value.RawValue: Numeric {
     ///         case b
     ///         case c
     ///     }
+    ///
     ///     struct RootPreferences: View {
     ///         @Preference("someEnumValue") private var value = SomeEnum.a
     ///
