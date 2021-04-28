@@ -85,7 +85,7 @@ This will display an example enable/disable switch switch in the preferences.
 
 The @Preferences property wrapper is responsible for reading/writing your values, and updating your view when those values are changed. It works very similarly to Apple's own @AppStorage property wrapper.
 
-For each value you want to later access in your tweak's code you must declare @Preferences as it's source of truth. Use the $ prefix to for the property wrapped values in your SwiftUI code. Examples:
+For each value you want to later access in your tweak's code you must declare @Preferences as it's source of truth. Use the $ prefix for the property wrapped values in your SwiftUI code. Examples:
 ```swift
 // Example Toggle Switch.
 @Preference("enabled", identifier: identifier) var enabled = true // Correspond to:
@@ -134,7 +134,7 @@ NomaePreferences also has some extra utilities.
 
 - Respring by calling: `respring()`
 - SBReload by calling: `sbreload()`
-- You can also run yout own shell commands, see this [page](https://github.com/EamonTracey/NomaePreferences/wiki/shell(_:args:)) for more info.
+- You can also run your own shell commands, see this [page](https://github.com/EamonTracey/NomaePreferences/wiki/shell(_:args:)) for more info.
 
 ## Tweak Examples
 [ColorfulLines](https://github.com/EamonTracey/ColorfulLines) by Eamon Tracey
