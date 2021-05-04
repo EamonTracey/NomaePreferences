@@ -5,11 +5,13 @@ Check out the [Wiki](https://github.com/EamonTracey/NomaePreferences/wiki) for t
 
 ## Requirements
 
-- Xcode 12 or above
+- Xcode 11 or above
+- A [Theos](https://github.com/theos/theos) installation with the $THEOS environment variable
 - git
 
 ## Table of Contents:
 * [Setup](#setup)
+    + [Updating](#updating)
 * [Usage](#usage)
     + [Introduction](#introduction)
     + [Writing Values to Your Preferences](#writing-values-to-your-preferences)
@@ -20,20 +22,29 @@ Check out the [Wiki](https://github.com/EamonTracey/NomaePreferences/wiki) for t
 
 ## Setup
 
-[//]: <> (  UPDATE WHEN DISTRUBITION OF FRAMEWORK FOR THEOS WORKED OUT )
 Open a terminal and paste the following:
 ```bash
-cp -R NomaePreferences.framework $THEOS/lib
+git clone https://github.com/EamonTracey/NomaePreferences.git
+cd NomaePreferences
+./build.sh
 ```
 
-Link NomaePreferences in the Makefile
+Link NomaePreferences in the Makefile of your tweak:
 ```makefile
 $(TWEAK_NAME)_FRAMEWORKS += NomaePreferences
 ````
 
-Add NomaePreferences as a dependency in the control file
+Add NomaePreferences as a dependency in the control file of your tweak:
 ```
 Depends: com.eamontracey.nomaepreferences
+```
+
+### Updating
+
+To update NomaePreferences in the future open your terminal,  cd into the directory of NomaePreferences, and paste the following:
+```bash
+git pull
+./build.sh
 ```
 
 ## Usage
