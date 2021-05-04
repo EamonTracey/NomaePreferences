@@ -79,7 +79,7 @@ struct RootPreferencesView: View {
     }
 }
 ```
-This will display an example enable/disable switch switch in the preferences.
+This will display an example enable/disable switch in the preferences.
 
 ### Writing Values to Your Preferences
 
