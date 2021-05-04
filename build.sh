@@ -22,5 +22,19 @@ mv NomaePreferences.framework ../../../
 mv layout.deb ../../../NomaePreferences-$VERSION.deb
 
 # Clean
+echo "Cleaning..."
 cd ../../..
 rm -fr Build Logs ModuleCache.noindex info.plist
+
+# Add to THEOS
+echo "Copying the framework to theos directory..."
+if [[ -z "$THEOS" || ! -d "$THEOS" ]]; then
+    echo "Failed."
+    echo
+	echo "Please set up the \$THEOS environment variable to properly use NomaePreferences."
+	exit
+fi
+rm -rf $THEOS/lib/NomaePreferences.framework
+cp -r NomaePreferences.framework $THEOS/lib/
+
+echo "Done. Enjoy!"
