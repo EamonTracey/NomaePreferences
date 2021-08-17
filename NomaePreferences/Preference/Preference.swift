@@ -199,7 +199,7 @@ extension Preference where Value == URL {
         self.init(value: initialValue, store: store, key: key, transform: {
             ($0 as? String).flatMap(URL.init)
         }, saveValue: { newValue in
-            store.set(newValue.absoluteString, forKey: key)
+            store.setObject(newValue.absoluteString, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -235,7 +235,7 @@ extension Preference where Value: RawRepresentable, Value.RawValue == Int {
         self.init(value: initialValue, store: store, key: key, transform: {
             ($0 as? Value.RawValue).flatMap(Value.init)
         }, saveValue: { newValue in
-            store.set(newValue.rawValue, forKey: key)
+            store.setObject(newValue.rawValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -271,7 +271,7 @@ extension Preference where Value: RawRepresentable, Value.RawValue == String {
         self.init(value: initialValue, store: store, key: key, transform: {
             ($0 as? String).flatMap(Value.init)
         }, saveValue: { newValue in
-            store.set(newValue.rawValue, forKey: key)
+            store.setObject(newValue.rawValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
