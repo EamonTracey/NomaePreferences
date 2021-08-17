@@ -15,6 +15,12 @@ FOUNDATION_EXPORT double NomaePreferencesVersionNumber;
 //! Project version string for NomaePreferences.
 FOUNDATION_EXPORT const unsigned char NomaePreferencesVersionString[];
 
+// NSUserDefaults private API
+@interface NSUserDefaults (Private)
+- (nullable id)objectForKey:(nullable NSString *)key inDomain:(nullable NSString *)domain;
+- (void)setObject:(nullable id)value forKey:(nullable NSString *)key inDomain:(nullable NSString *)domain;
+@end
+
 // UIImage private API
 @interface UIImage (Private)
 + (nullable UIImage *)_applicationIconImageForBundleIdentifier:(nullable NSString *)bundleIdentifier format:(int)format;

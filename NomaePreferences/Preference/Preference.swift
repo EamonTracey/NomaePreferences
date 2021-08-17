@@ -9,10 +9,8 @@
 // The following changes have been made:
 //      - `AppStorage` renamed to `Preference` (typealias removed).
 //      - Rather than initializing with a UserDefaults object, a `String` identifier is used.
-//          UserDefaults with suite name "/var/mobile/Library/Preferences/\(identifier).plist"
-//          is created. Due to cfprefsd internals and because we provided an absolute path as
-//          the suite name, the given file path will be used to store preferences. Thus, the
-//          preferences can be accessed in any process.
+//        The key is then appended to the identifier to create an identifiedKey. Each value
+//        is stored in the `UserDefaults` global domain with its respective identifiedKey.
 //      - Support storing `Numeric`s rather than only `Int`s and `Double`s.
 //      - Added support for storing `Array`-like objects.
 //
@@ -100,12 +98,13 @@ extension Preference where Value == Bool {
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Bool ?? wrappedValue
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Bool ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Bool
         }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -118,12 +117,13 @@ extension Preference where Value: Numeric {
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -136,12 +136,13 @@ extension Preference where Value == String {
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? String ?? wrappedValue
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? String ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? String
         }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -154,12 +155,13 @@ extension Preference where Value == Data {
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Data ?? wrappedValue
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Data ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Data
         }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -172,12 +174,13 @@ extension Preference where Value == Date {
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Date ?? wrappedValue
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Date ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Date
         }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -190,8 +193,9 @@ extension Preference where Value == URL {
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? URL ?? wrappedValue
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? URL ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             ($0 as? String).flatMap(URL.init)
         }, saveValue: { newValue in
@@ -200,7 +204,7 @@ extension Preference where Value == URL {
     }
 }
 
-extension Preference where Value: RawRepresentable, Value.RawValue: Numeric {
+extension Preference where Value: RawRepresentable, Value.RawValue == Int {
     /// Creates a property that can read and write to a `Numeric` user default,
     /// transforming that to `RawRepresentable` data type.
     ///
@@ -224,8 +228,9 @@ extension Preference where Value: RawRepresentable, Value.RawValue: Numeric {
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let rawValue = store.object(forKey: key) as? Value.RawValue
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let rawValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Int
         let initialValue = rawValue.flatMap(Value.init) ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             ($0 as? Value.RawValue).flatMap(Value.init)
@@ -259,8 +264,9 @@ extension Preference where Value: RawRepresentable, Value.RawValue == String {
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let rawValue = store.object(forKey: key) as? String
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let rawValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? String
         let initialValue = rawValue.flatMap(Value.init) ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             ($0 as? String).flatMap(Value.init)
@@ -278,12 +284,13 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -296,12 +303,13 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -314,12 +322,13 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -332,12 +341,13 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -350,12 +360,13 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let initialValue = store.object(forKey: key) as? Value ?? wrappedValue
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             $0 as? Value
         }, saveValue: { newValue in
-            store.set(newValue, forKey: key)
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -368,18 +379,19 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let stringArray = store.object(forKey: key) as? [String]
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let stringArray = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? [String]
         let initialValue = stringArray?.compactMap(URL.init) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             ($0 as? [String])?.compactMap(URL.init) as? Value
         }, saveValue: { newValue in
-            store.set((newValue as? [URL])?.compactMap { $0.absoluteString }, forKey: key)
+            store.setObject((newValue as? [URL])?.compactMap { $0.absoluteString }, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
 
-extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement: RawRepresentable, Value.ArrayLiteralElement.RawValue: Numeric {
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement: RawRepresentable, Value.ArrayLiteralElement.RawValue == Int {
     /// Creates a property that can read and write to an `Array`-like set of `Numeric`s user default,
     /// transforming that to an `Array`-like set of  `RawRepresentable` data type.
     ///
@@ -389,13 +401,14 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let rawArray = store.object(forKey: key) as? [Value.ArrayLiteralElement.RawValue]
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let rawArray = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? [Int]
         let initialValue = rawArray?.compactMap(Value.ArrayLiteralElement.init) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            ($0 as? [Value.ArrayLiteralElement.RawValue])?.compactMap(Value.ArrayLiteralElement.init) as? Value
+            ($0 as? [Int])?.compactMap(Value.ArrayLiteralElement.init) as? Value
         }, saveValue: { newValue in
-            store.set((newValue as? [Value.ArrayLiteralElement])?.compactMap { $0.rawValue }, forKey: key)
+            store.setObject((newValue as? [Value.ArrayLiteralElement])?.compactMap { $0.rawValue }, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
@@ -410,13 +423,14 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
-        let store = UserDefaults(suiteName: "/var/mobile/Library/Preferences/\(identifier).plist")!
-        let rawArray = store.object(forKey: key) as? [String]
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let rawArray = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? [String]
         let initialValue = rawArray?.compactMap(Value.ArrayLiteralElement.init) as? Value ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
             ($0 as? [String])?.compactMap(Value.ArrayLiteralElement.init) as? Value
         }, saveValue: { newValue in
-            store.set((newValue as? [Value.ArrayLiteralElement])?.compactMap { $0.rawValue }, forKey: key)
+            store.setObject((newValue as? [Value.ArrayLiteralElement])?.compactMap { $0.rawValue }, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
     }
 }
