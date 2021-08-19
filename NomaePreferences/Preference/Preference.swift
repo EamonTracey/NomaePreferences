@@ -109,19 +109,57 @@ extension Preference where Value == Bool {
     }
 }
 
-extension Preference where Value: Numeric {
-    /// Creates a property that can read and write to a `Numeric` user default.
+extension Preference where Value == Int {
+    /// Creates a property that can read and write to an `Int` user default.
     ///
     /// - Parameters:
-    ///   - wrappedValue: The default value if a `Numeric` value is not specified for the given key.
+    ///   - wrappedValue: The default value if an `Int` value is not specified for the given key.
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
         let identifiedKey = identifier + "." + key
         let store = UserDefaults.standard
-        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Int ?? wrappedValue
         self.init(value: initialValue, store: store, key: key, transform: {
-            $0 as? Value
+            $0 as? Int
+        }, saveValue: { newValue in
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
+        })
+    }
+}
+
+extension Preference where Value == Float {
+    /// Creates a property that can read and write to a `Float` user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if a `Float` value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Float ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            $0 as? Float
+        }, saveValue: { newValue in
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
+        })
+    }
+}
+
+extension Preference where Value == Double {
+    /// Creates a property that can read and write to a `Double` user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if a `Double` value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Double ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            $0 as? Double
         }, saveValue: { newValue in
             store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
         })
@@ -295,11 +333,49 @@ extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralE
     }
 }
 
-extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement: Numeric {
-    /// Creates a property that can read and write to an `Array`-like set of `Numeric`s user default.
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == Int {
+    /// Creates a property that can read and write to an `Array`-like set of `Int`s user default.
     ///
     /// - Parameters:
-    ///   - wrappedValue: The default value if an `Array`-like set of `Numeric`s  value is not specified for the given key.
+    ///   - wrappedValue: The default value if an `Array`-like set of `Int`s  value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            $0 as? Value
+        }, saveValue: { newValue in
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
+        })
+    }
+}
+
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == Float {
+    /// Creates a property that can read and write to an `Array`-like set of `Float`s user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if an `Array`-like set of `Float`s  value is not specified for the given key.
+    ///   - key: The key to read and write the value to in the `UserDefaults` store.
+    ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
+    public init(wrappedValue: Value, _ key: String, identifier: String) {
+        let identifiedKey = identifier + "." + key
+        let store = UserDefaults.standard
+        let initialValue = store.object(forKey: identifiedKey, inDomain: UserDefaults.globalDomain) as? Value ?? wrappedValue
+        self.init(value: initialValue, store: store, key: key, transform: {
+            $0 as? Value
+        }, saveValue: { newValue in
+            store.setObject(newValue, forKey: identifiedKey, inDomain: UserDefaults.globalDomain)
+        })
+    }
+}
+
+extension Preference where Value: ExpressibleByArrayLiteral, Value.ArrayLiteralElement == Double {
+    /// Creates a property that can read and write to an `Array`-like set of `Double`s user default.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The default value if an `Array`-like set of `Double`s  value is not specified for the given key.
     ///   - key: The key to read and write the value to in the `UserDefaults` store.
     ///   - identifier: The identifier used for the `UserDefaults` suite and cfprefsd plist path.
     public init(wrappedValue: Value, _ key: String, identifier: String) {
